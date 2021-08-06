@@ -28,10 +28,10 @@ var API_RES = [
   document.getElementById('run3').addEventListener('click', updateData);
   
   function searchKeyword() {
-    var keyword = document.getElementById('serachString').value.trim();
+    var keyword = document.getElementById('serachString').value.trim(); // will capture the value of the textbox
     var NEW_RES = [];
     API_RES.forEach(item => {
-      if (item.content.includes(keyword)) {
+      if (item.content.includes(keyword)) { // will look for the keyword in each item's content over the loop
         NEW_RES.push(item);
       }
     });
@@ -41,7 +41,9 @@ var API_RES = [
   function order() {
     var p1 = document.getElementById('p1').value;
     var p2 = document.getElementById('p2').value;
-    var TEMP_API_RES = [...API_RES];
+    var TEMP_API_RES = [...API_RES]; // creating the copy of actual result
+    // JS supports the sort function, but here the sorting is based of the dates which are thhe part of the item
+    // so here I am running the function inside the sort fucntion as a callback.
     if (p1 === '1' && p2 === '1') {
       TEMP_API_RES.sort(function(a, b) {
         return new Date(a.createdDate) - new Date(b.createdDate);
@@ -65,9 +67,9 @@ var API_RES = [
   function updateData() {
     id = document.getElementById('id').value.trim();
     newContent = document.getElementById('newContent').value;
-    var TEMP_API_RES = [...API_RES];
+    var TEMP_API_RES = [...API_RES]; // creating the copy of actual result
     TEMP_API_RES.forEach(item => {
-      if (id === item.id) {
+      if (id === item.id) { // will loop over the array and find the id entered in the textbox and updates the content- of that particular id only
         item.content = newContent;
       }
     });
